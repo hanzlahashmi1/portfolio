@@ -1,0 +1,126 @@
+/* Colors live in variables so dark mode only has to change them here */
+:root {
+  --bg: #eef1f6;
+  --surface: #ffffff;
+  --text: #14213d;
+  --muted: #4d5b78;
+  --accent: #2347d9;
+  --accent-text: #ffffff;
+  --mark: #f2b134;
+  --line: #cdd5e3;
+  --font: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f1a33;
+  --surface: #17254a;
+  --text: #eaf0ff;
+  --muted: #a9b7d6;
+  --accent: #8aa4ff;
+  --accent-text: #0f1a33;
+  --line: #2b3b66;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--mark); outline-offset: 3px; }
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.25rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.logo { font-weight: 800; font-size: 1.25rem; text-decoration: none; }
+.nav { display: none; width: 100%; flex-direction: column; gap: 0.75rem; padding-top: 0.75rem; }
+.nav.open { display: flex; }
+.nav a { text-decoration: none; color: var(--muted); font-weight: 600; }
+.nav a:hover { color: var(--accent); }
+
+.menu-btn, .theme-btn {
+  font: inherit;
+  font-weight: 600;
+  color: var(--text);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+}
+.theme-btn { align-self: flex-start; }
+
+/* Layout */
+main, .site-footer { max-width: 60rem; margin: 0 auto; padding: 0 1.25rem; }
+.section { padding: 3.5rem 0; border-top: 1px solid var(--line); }
+
+/* Hero: the one big moment on the page */
+.hero { padding: 4.5rem 0 4rem; }
+.hero h1 {
+  margin: 0 0 1.25rem;
+  max-width: 16ch;
+  font-size: clamp(2.4rem, 8vw, 4.75rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.lead { max-width: 52ch; color: var(--muted); font-size: 1.2rem; margin: 0 0 2rem; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.3rem;
+  border: 2px solid var(--text);
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+
+/* Sections */
+h2 { margin: 0 0 1.5rem; font-size: 1.9rem; letter-spacing: -0.02em; }
+h3 { margin: 0 0 0.35rem; font-size: 1.2rem; }
+
+.project-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; }
+.project { padding-left: 1.1rem; border-left: 4px solid var(--mark); }
+.project p { margin: 0 0 0.4rem; max-width: 60ch; }
+.tags { color: var(--muted); font-size: 0.95rem; }
+
+.skills { display: grid; gap: 1.5rem; }
+.skills p { margin: 0; color: var(--muted); }
+
+.links { margin-top: 1.5rem; display: flex; gap: 1.25rem; }
+
+.site-footer { padding-top: 2rem; padding-bottom: 2.5rem; color: var(--muted); border-top: 1px solid var(--line); }
+
+/* Wider screens: show the nav in a row, skills in 3 columns */
+@media (min-width: 700px) {
+  .menu-btn { display: none; }
+  .nav { display: flex; flex-direction: row; align-items: center; width: auto; gap: 1.5rem; padding-top: 0; }
+  .skills { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn { transition: none; }
+}
